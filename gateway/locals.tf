@@ -31,5 +31,6 @@ locals {
     KUBE_CONFIG           = var.kube_config
     ARGOCD_SERVER_SECRET  = random_password.argocd_server_secret.result
     ARGOCD_ADMIN_PASSWORD = var.argocd_admin_password
+    OAUTH_ACCESS_GROUPS   = local.oauth_access_groups
   }))
 }

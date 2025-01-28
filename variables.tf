@@ -17,7 +17,7 @@ variable "environment" { # CI/CD pipeline config
 variable "argocd_version" {
   description = "ArgoCD Helm chart version"
   type        = string
-  default     = "7.7.6"
+  default     = "7.7.16"
 }
 
 variable "argocd_config_path" { # CI/CD project directory

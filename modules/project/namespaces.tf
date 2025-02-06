@@ -9,7 +9,7 @@ module "namespace" {
 
   application = each.value["name"]
 
-  path        = each.key
+  path        = "${var.project_path}/${each.key}"
   config_path = var.config_path
   variables   = var.variables
 

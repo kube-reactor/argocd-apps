@@ -5,7 +5,7 @@
 locals {
   applications = {
     for file in fileset(var.project_path, "*/info.yaml") :
-    dirname("${var.project_path}/${file}") => yamldecode(templatefile("${var.project_path}/${file}", var.variables))
+    dirname(file) => yamldecode(templatefile("${var.project_path}/${file}", var.variables))
   }
 
   enabled_applications = {
@@ -16,8 +16,8 @@ locals {
 
   roles = {
     for path, config in local.enabled_applications :
-    config.name => fileexists("${path}/roles.yaml")
-    ? yamldecode(templatefile("${path}/roles.yaml", var.variables))
+    config.name => fileexists("${var.project_path}/${path}/roles.yaml")
+    ? yamldecode(templatefile("${var.project_path}/${path}/roles.yaml", var.variables))
     : null
   }
 }
@@ -146,12 +146,12 @@ locals {
             releaseName     = lookup(config, "release", config.name)
             passCredentials = lookup(config, "pass_credentials", false)
             skipCrds        = lookup(config, "skipCrds", false)
-            values = fileexists("${path}/values.${var.variables.environment}.yaml") ? try(
-              nonsensitive(templatefile("${path}/values.${var.variables.environment}.yaml", var.variables)),
-              templatefile("${path}/values.${var.variables.environment}.yaml", var.variables)
-              ) : fileexists("${path}/values.yaml") ? try(
-              nonsensitive(templatefile("${path}/values.yaml", var.variables)),
-              templatefile("${path}/values.yaml", var.variables)
+            values = fileexists("${var.project_path}/${path}/values.${var.variables.environment}.yaml") ? try(
+              nonsensitive(templatefile("${var.project_path}/${path}/values.${var.variables.environment}.yaml", var.variables)),
+              templatefile("${var.project_path}/${path}/values.${var.variables.environment}.yaml", var.variables)
+              ) : fileexists("${var.project_path}/${path}/values.yaml") ? try(
+              nonsensitive(templatefile("${var.project_path}/${path}/values.yaml", var.variables)),
+              templatefile("${var.project_path}/${path}/values.yaml", var.variables)
             ) : ""
           } : null
         }

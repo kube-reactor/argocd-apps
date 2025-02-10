@@ -24,13 +24,13 @@ resource "helm_release" "argocd" {
   wait          = true
   wait_for_jobs = true
 
-  values = fileexists("${var.argocd_config_path}/values.${var.variables.environment}.yaml") ? try(
-    nonsensitive(templatefile("${var.argocd_config_path}/values.${var.variables.environment}.yaml", var.variables)),
-    templatefile("${var.argocd_config_path}/values.${var.variables.environment}.yaml", var.variables)
-    ) : fileexists("${var.argocd_config_path}/values.yaml") ? try(
+  values = fileexists("${var.argocd_config_path}/values.${var.environment}.yaml") ? [try(
+    nonsensitive(templatefile("${var.argocd_config_path}/values.${var.environment}.yaml", var.variables)),
+    templatefile("${var.argocd_config_path}/values.${var.environment}.yaml", var.variables)
+    )] : fileexists("${var.argocd_config_path}/values.yaml") ? [try(
     nonsensitive(templatefile("${var.argocd_config_path}/values.yaml", var.variables)),
     templatefile("${var.argocd_config_path}/values.yaml", var.variables)
-  ) : null
+  )] : null
 
   depends_on = [
     module.argocd

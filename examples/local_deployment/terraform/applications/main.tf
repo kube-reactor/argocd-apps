@@ -28,7 +28,8 @@ module "kubernetes_apps" {
 
   project_sequence = [
     "helm",
-    "git-folder"
+    "git-folder",
+    "databases"
   ]
 
   variables = local.variables

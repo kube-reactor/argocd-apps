@@ -1,0 +1,13 @@
+resources:
+  limits:
+    cpu: 150m
+    memory: 192Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+env:
+  targetNamespace: "*"
+  operatorApiUrl: "http://postgres-operator.postgres-operator:8080"
+  teams:
+  - nexical

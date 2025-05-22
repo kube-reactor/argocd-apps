@@ -62,7 +62,7 @@ variable "variables" {
 variable "default_repository" {
   type        = string
   description = "Default ArgoCD application repository (Git or Helm)"
-  default     = "https://charts.zimagi.com"
+  default     = "https://charts.kube-reactor.com"
 }
 variable "default_chart" {
   type        = string
@@ -77,5 +77,5 @@ variable "default_path" {
 variable "default_version" {
   type        = string
   description = "Default ArgoCD application Helm chart version from Helm repository"
-  default     = "1.1.5"
+  default     = "2.0.1"
 }

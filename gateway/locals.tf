@@ -21,6 +21,7 @@ locals {
     PROJECT_PATH          = var.project_path
     KUBE_CONFIG           = var.kube_config
     ARGOCD_ADMIN_PASSWORD = var.argocd_admin_password
-    OAUTH_ACCESS_GROUPS   = local.oauth_access_groups
+    OAUTH_ACCESS_EMAILS   = join("\\n", local.oauth_emails)
+    oauth_access_groups   = local.oauth_access_groups
   }))
 }

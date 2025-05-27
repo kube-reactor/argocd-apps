@@ -1,9 +1,0 @@
-enabled: ["dev"]
-
-name: kube-prometheus-stack
-repository: "https://prometheus-community.github.io/helm-charts"
-chart: kube-prometheus-stack
-skipCrds: true
-version: 55.5.0
-
-self_heal: true

@@ -1,7 +1,7 @@
 
 locals {
-  argocd_name        = "argocd"
-  argocd_roles_file  = "${var.argocd_config_path}/roles.yaml"
+  argocd_name       = "argocd"
+  argocd_roles_file = "${var.argocd_config_path}/roles.yaml"
 }
 
 locals {

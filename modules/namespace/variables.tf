@@ -18,10 +18,6 @@ variable "path" {
   description = "Project path that contains secrets and config files"
   type        = string
 }
-variable "config_path" {
-  description = "Project configuration and secret additions path (non-versioned)"
-  type        = string
-}
 
 variable "labels" {
   description = "Kubernetes namespace labels"

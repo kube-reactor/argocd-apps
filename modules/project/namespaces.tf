@@ -9,9 +9,8 @@ module "namespace" {
 
   application = each.value["name"]
 
-  path        = "${var.project_path}/${each.key}"
-  config_path = var.config_path
-  variables   = var.variables
+  path      = "${var.project_path}/${each.key}"
+  variables = var.variables
 
   labels      = merge(var.labels, lookup(each.value, "labels", {}))
   annotations = merge(var.annotations, lookup(each.value, "annotations", {}))

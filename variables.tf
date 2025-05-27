@@ -28,11 +28,6 @@ variable "project_path" { # CI/CD project directory
   description = "Base project configuration path"
   type        = string
 }
-variable "config_path" { # Local directory
-  description = "Project configuration additions path (non-versioned)"
-  type        = string
-  default     = ""
-}
 
 variable "project_sequence" {
   description = "Ordered collections of ArgoCD Application projects (up to 10 projects supported)"

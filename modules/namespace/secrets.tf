@@ -10,9 +10,8 @@ resource "kubernetes_secret" "secrets" {
     annotations = local.secrets != null ? (lookup(local.secrets, each.value, null) != null ? lookup(local.secrets[each.value], "annotations", null) : null) : null
   }
 
-  type      = local.secrets != null ? (lookup(local.secrets, each.value, null) != null ? lookup(local.secrets[each.value], "type", null) : null) : null
-  immutable = local.secrets != null ? (lookup(local.secrets, each.value, null) != null ? lookup(local.secrets[each.value], "immutable", null) : null) : null
-
+  type        = local.secrets != null ? (lookup(local.secrets, each.value, null) != null ? lookup(local.secrets[each.value], "type", null) : null) : null
+  immutable   = local.secrets != null ? (lookup(local.secrets, each.value, null) != null ? lookup(local.secrets[each.value], "immutable", null) : null) : null
   data        = sensitive(local.secrets != null ? (lookup(local.secrets, each.value, null) != null ? lookup(local.secrets[each.value], "data", null) : null) : null)
   binary_data = sensitive(local.secrets != null ? (lookup(local.secrets, each.value, null) != null ? lookup(local.secrets[each.value], "binary", null) : null) : null)
 

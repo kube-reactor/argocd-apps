@@ -1,6 +1,6 @@
 
 resource "kubernetes_secret" "secrets" {
-  for_each = try(nonsensitive(local.secret_names), local.secret_names)
+  for_each = toset(try(nonsensitive(local.secret_names), local.secret_names))
 
   metadata {
     name      = each.value

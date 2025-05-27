@@ -1,6 +1,6 @@
 
 resource "kubernetes_config_map" "config" {
-  for_each = try(nonsensitive(local.config_names), local.config_names)
+  for_each = toset(try(nonsensitive(local.config_names), local.config_names))
 
   metadata {
     name      = each.value

@@ -3,7 +3,7 @@
 #
 locals {
   secrets_path     = "${var.path}/secrets.yaml"
-  env_secrets_path = "${var.path}/secrets.${var.variables.environment}.yaml"
+  env_secrets_path = "${var.path}/secrets.${var.variables.ENVIRONMENT}.yaml"
 
   secrets_raw = fileexists(local.env_secrets_path) ? yamldecode(
     file(local.env_secrets_path)
@@ -27,7 +27,7 @@ locals {
 #
 locals {
   config_path     = "${var.path}/config.yaml"
-  env_config_path = "${var.path}/config.${var.variables.environment}.yaml"
+  env_config_path = "${var.path}/config.${var.variables.ENVIRONMENT}.yaml"
 
   config_raw = fileexists(local.env_config_path) ? yamldecode(
     file(local.env_config_path)

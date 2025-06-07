@@ -11,7 +11,7 @@ locals {
   enabled_applications = {
     for path, config in local.applications : path => config
     if contains(lookup(config, "enabled", []), "all")
-    || contains(lookup(config, "enabled", []), var.variables.environment)
+    || contains(lookup(config, "enabled", []), var.variables.ENVIRONMENT)
   }
 
   roles = {
@@ -146,9 +146,9 @@ locals {
             releaseName     = lookup(config, "release", config.name)
             passCredentials = lookup(config, "pass_credentials", false)
             skipCrds        = lookup(config, "skipCrds", false)
-            values = fileexists("${var.project_path}/${path}/values.${var.variables.environment}.yaml") ? try(
-              nonsensitive(templatefile("${var.project_path}/${path}/values.${var.variables.environment}.yaml", var.variables)),
-              templatefile("${var.project_path}/${path}/values.${var.variables.environment}.yaml", var.variables)
+            values = fileexists("${var.project_path}/${path}/values.${var.variables.ENVIRONMENT}.yaml") ? try(
+              nonsensitive(templatefile("${var.project_path}/${path}/values.${var.variables.ENVIRONMENT}.yaml", var.variables)),
+              templatefile("${var.project_path}/${path}/values.${var.variables.ENVIRONMENT}.yaml", var.variables)
               ) : fileexists("${var.project_path}/${path}/values.yaml") ? try(
               nonsensitive(templatefile("${var.project_path}/${path}/values.yaml", var.variables)),
               templatefile("${var.project_path}/${path}/values.yaml", var.variables)

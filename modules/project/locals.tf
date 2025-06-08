@@ -142,7 +142,7 @@ locals {
           path           = lookup(config, "path", var.default_path) # Git Repository only
           targetRevision = lookup(config, "version", var.default_version)
 
-          helm = lookup(config, "chart", null) != null ? {
+          helm = lookup(config, "chart", null) != null || fileexists("${var.project_path}/${path}/values.${var.variables.ENVIRONMENT}.yaml") || fileexists("${var.project_path}/${path}/values.yaml") ? {
             releaseName     = lookup(config, "release", config.name)
             passCredentials = lookup(config, "pass_credentials", false)
             skipCrds        = lookup(config, "skipCrds", false)
